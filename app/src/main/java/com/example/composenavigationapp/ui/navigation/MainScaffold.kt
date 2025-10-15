@@ -6,6 +6,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.QuestionMark
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -19,6 +20,7 @@ import androidx.navigation.compose.*
 import com.example.composenavigationapp.ui.screens.AddScreen
 import com.example.composenavigationapp.ui.screens.DetailScreen
 import com.example.composenavigationapp.ui.screens.HomeScreen
+import com.example.composenavigationapp.ui.screens.NilaiScreen
 import com.example.composenavigationapp.ui.screens.ProfileScreen
 import com.example.composenavigationapp.ui.screens.SettingsScreen
 import kotlinx.coroutines.launch
@@ -31,9 +33,10 @@ androidx.compose.ui.graphics.vector.ImageVector) {
         Icons.Filled.Person)
     data object Settings : BottomItem(Routes.SETTINGS, "Settings",
         Icons.Filled.Settings)
+    data object Nilai : BottomItem(Routes.ABOUT, "Nilai",
+        Icons.Filled.QuestionMark)
 }
-private val bottomItems = listOf(BottomItem.Home, BottomItem.Profile,
-    BottomItem.Settings)
+private val bottomItems = listOf(BottomItem.Home, BottomItem.Profile, BottomItem.Settings, BottomItem.Nilai)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -150,6 +153,11 @@ private fun AppDrawer(onNavigate: (String) -> Unit) {
             selected = false,
             onClick = { onNavigate(Routes.SETTINGS) }
         )
+        NavigationDrawerItem(
+            label = { Text("Nilai") },
+            selected = false,
+            onClick = { onNavigate(Routes.ABOUT) }
+        )
     }
 }
 
@@ -164,5 +172,6 @@ private fun MainNavHost(navController: NavHostController) {
         composable(Routes.PROFILE) { ProfileScreen() }
         composable(Routes.SETTINGS) { SettingsScreen() }
         composable(Routes.ADD) { AddScreen(navController) }
+        composable(Routes.ABOUT) { NilaiScreen() }
     }
 }
